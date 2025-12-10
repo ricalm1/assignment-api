@@ -2,7 +2,7 @@
     --primary-color: #ff6f61;
     --secondary-color: #ffe66d;
     --bg-color: #f7f7f7;
-    --text-color: #333;
+    --text-color: #0c0c0c;
   }
   
   * {
@@ -12,7 +12,7 @@
   }
   
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     min-height: 100vh;
@@ -76,3 +76,16 @@
     border-radius: 10px;
     margin-bottom: 0.5rem;
   }
+
+  @media (max-width: 950px) {
+    .card {
+      width: 45%;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .card {
+      width: 90%;
+    }
+    }
+  

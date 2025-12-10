@@ -82,3 +82,53 @@ function getMealIngredients(meal) {
   }
   
   drinkBtn.addEventListener("click", loadDrinks);
+
+  function getRandomIngredients() {
+    const useFoodIngredients = Math.random() < 0.5;
+    
+    if (useFoodIngredients) {
+      return fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+        .then(response => response.json())
+        .then(data => {
+          const meal = data.meals[0];
+          return getMealIngredients(meal);
+        });
+    } else {
+      return fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+        .then(response => response.json())
+        .then(data => {
+          const drink = data.drinks[0];
+          return getDrinkIngredients(drink);
+        });
+    }
+  }
+   /* To make everything a little fuckywucky*/
+  function getRandomFood() {
+    fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+      .then(response => response.json())
+      .then(data => {
+        const meal = data.meals[0];
+        return getRandomIngredients().then(ingredients => {
+          const card = createCard(meal.strMeal, meal.strMealThumb, ingredients);
+          foodGrid.appendChild(card);
+        });
+      });
+  }
+  
+  function getRandomDrink() {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+      .then(response => response.json())
+      .then(data => {
+        const drink = data.drinks[0];
+        return getRandomIngredients().then(ingredients => {
+          const card = createCard(drink.strDrink, drink.strDrinkThumb, ingredients);
+          drinkGrid.appendChild(card);
+        });
+      });
+  }
+
+
+  window.addEventListener("DOMContentLoaded", () => {
+    getRandomFood();
+    getRandomDrink();
+  });
