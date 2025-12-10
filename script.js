@@ -49,3 +49,36 @@ function getMealIngredients(meal) {
   }
   
   foodBtn.addEventListener("click", loadFoods);
+
+  function getDrinkIngredients(drink) {
+    let ingredientsList = "";
+    for (let i = 1; i <= 15; i++) {
+      const ingredient = drink["strIngredient" + i];
+      const measure = drink["strMeasure" + i];
+      if (ingredient && ingredient.trim() !== "") {
+        ingredientsList += `<li>${measure || ""} ${ingredient}</li>`;
+      }
+    }
+    return ingredientsList;
+  }
+  
+  function getRandomDrink() {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+      .then(response => response.json())
+      .then(data => {
+        const drink = data.drinks[0];
+        const ingredients = getDrinkIngredients(drink);
+        const card = createCard(drink.strDrink, drink.strDrinkThumb, ingredients);
+        drinkGrid.appendChild(card);
+      });
+  }
+  
+  function loadDrinks() {
+    drinkGrid.innerHTML = "";
+    const count = Number(drinkMode.value);
+    for (let i = 0; i < count; i++) {
+      getRandomDrink();
+    }
+  }
+  
+  drinkBtn.addEventListener("click", loadDrinks);
