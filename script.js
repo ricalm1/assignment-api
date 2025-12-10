@@ -132,3 +132,20 @@ function getMealIngredients(meal) {
     getRandomFood();
     getRandomDrink();
   });
+
+const popout = document.getElementById("popoutPanel");
+const img = document.getElementById("cornerImage");
+const audio = document.getElementById("voiceAudio");
+
+img.addEventListener("click", () => {
+  const isOpen = img.classList.toggle("open");
+  popout.classList.toggle("open");
+
+  if (isOpen) {
+    audio.currentTime = 0;
+    audio.play();
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+});

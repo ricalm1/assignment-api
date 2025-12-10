@@ -77,15 +77,64 @@
     margin-bottom: 0.5rem;
   }
 
+  .corner-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .corner-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.35s ease, width 0.35s ease, height 0.35s ease;
+  }
+  
+  .corner-image.open {
+    width: 320px;
+    height: 320px;
+    border-radius: 16px;
+  }
+  
+  .popout {
+    position: absolute;
+    bottom: 0;
+    right: 250px;
+    width: 280px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(20px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  
+  .popout.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
   @media (max-width: 950px) {
     .card {
       width: 45%;
     }
-  }
+}
+  
   
   @media (max-width: 600px) {
     .card {
       width: 90%;
     }
-    }
-  
+    
+  }
+
+
+@media (max-width: 985px){
+    .corner-widget {
+        display: none;
+      }
+}
